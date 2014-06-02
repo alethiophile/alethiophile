@@ -1,0 +1,41 @@
+# Copyright 2010 A Frederick Christensen <fauxmight@nosocomia.com>
+# Distributed under the terms of the GNU General Public License v2
+
+SUMMARY="Console-based pandora.com player"
+DESCRIPTION="Pianobar is a free/open-source, console-based replacement for pandora's flash player"
+
+HOMEPAGE="http://6xq.net/projects/pianobar/"
+DOWNLOADS="http://6xq.net/projects/pianobar/${PNV}.tar.bz2"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+MYOPTIONS="
+    (
+        faad
+        mad
+    ) [[ number-selected = at-least-one ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/gnutls
+        dev-libs/json-c
+        dev-libs/libgcrypt
+        media-libs/libao
+        faad? ( media-libs/faad2 )
+        mad? ( media-libs/libmad )
+"
+
+BUGS_TO="fauxmight@nosocomia.com"
+
+src_compile() {
+    option faad || MY_MAKE_OPTS+="DISABLE_FAAD=1"
+    option mad  || MY_MAKE_OPTS+="DISABLE_MAD=1"
+
+    emake CC="${CC} -std=c99" CFLAGS="${CFLAGS}" $MY_MAKE_OPTS
+}
+
+src_install() {
+    emake PREFIX=${IMAGE}/usr install
+}
