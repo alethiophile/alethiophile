@@ -1,6 +1,8 @@
 # Copyright 2010 A Frederick Christensen <fauxmight@nosocomia.com>
 # Distributed under the terms of the GNU General Public License v2
 
+# Updates 2014 by Tom Hunt <tomdicksonhunt@gmail.com>
+
 SUMMARY="Console-based pandora.com player"
 DESCRIPTION="Pianobar is a free/open-source, console-based replacement for pandora's flash player"
 
